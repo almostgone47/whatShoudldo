@@ -28,7 +28,7 @@ event = {}
 uids = []
 User.all.each { |u| uids << u.id }
 @participants = []
-@users = User.all.each { |x| @participants << x.first_name }
+@users = User.all.each { |x| @participants << x.id }
 @mood = ["Chill", "Fun", "Crazy"]
 
 categories = {

@@ -33,6 +33,19 @@
      margin-top: 150px;
      color: white
  }
+ 
+ a.card-hyperlink, a.card-hyperlink:hover {
+    color: #333;
+    text-decoration: none;
+ }
+
+ .slide-c {
+    height: 400px !important; 
+    overflow: hidden; 
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+ }
 
 .nav-link {
     padding-top: 2px;
@@ -62,6 +75,17 @@
     border-radius: 150px;
     width: 200px;
     height: 200px;
+}
+.avatar-small {
+    display: block;
+    border-radius: 150px;
+    width: 50px;
+    height: 50px;
+}
+.avatar-xs {
+    border-radius: 150px;
+    width: 30px;
+    height: 30px;
 }
  .avatar-nav {
     display: block;

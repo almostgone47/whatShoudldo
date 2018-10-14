@@ -12,11 +12,9 @@
   
     <% if signed_in? %>
       <ul class="navbar-nav ml-auto">
-        <% if !current_user.participant? %>
           <li class="nav-item mt-4">
             <%= link_to "Create an event", new_event_path, class: "align-middle mr-5 text-dark" %>
           </li> 
-        <% end %>
         <% if !current_user.participant? %>
           <li class="nav-item mt-4">
             <%= link_to "My Events", users_path, class: "align-middle mr-5 text-dark" %>
