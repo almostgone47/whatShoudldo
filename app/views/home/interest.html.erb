@@ -1,0 +1,20 @@
+<div class="container">
+    <h3>Select all the events you're interested in</h3></br>
+    <div class="card-deck mx-0">
+        <% @sub_category.each_with_index {|x, i| %>
+            <% x.each { |y| %>
+                <div class="col-md-2 col-sm-4 col-xs-16 px-0 mb-4">
+                    <%= link_to "/", :class => "card btn py-0 px-0 text-white bg-success" do %>
+                        <div class="card-body">
+                            <h5 class="card-title"> <%= y %> </h5>
+                        </div>
+                    <% end %>
+                </div>
+            <% } %>    
+        <% } %>
+    </div>
+</div>
+    <%#= bootstrap_form_with(model: @user, local: true ) do |f| %>
+      <%#= f.button :interests %>
+      <%#= f.submit "Create" %>
+    <%# end %>

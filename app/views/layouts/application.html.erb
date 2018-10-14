@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Whatthefuckshouldido</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <title>WhatTheFuckShouldIDo</title>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= csrf_meta_tag %>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="<%= @home_page && !signed_in? ? 'homepage' : ''%>">
+  <%= render 'layouts/navigation' %>
+
+  <div id="flash-alert">
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %> fade show">
+            <%= value %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+  <script>
+    $("#flash-alert").fadeTo(2000, 500).fadeOut(500, function(){
+      $("#flash-alert").alert('close');
+    });
+  </script>
+</body>
 </html>

@@ -1,0 +1,61 @@
+<div class="container my-5">
+    <div class="">
+    <%= bootstrap_form_with(model: @event, local: true, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" ) do |f| %>
+      <%= f.text_field :title %>
+      <%= f.text_field :description %>
+      <%= f.select :category, @category, :prompt => true  %>
+      <%= f.select :sub_category, @sub_categories, :prompt => true %>
+      <%= f.select :mood, ["Chill", "Fun", "Crazy"], :prompt => true, label: "Mood" %>
+      <%= f.text_field :location, id: "searchTextField" %>
+      <%= f.text_field :time, id: "datepicker", data:{ provide:'datepicker' } %>
+      <%= f.text_field :cost %>
+      <%= f.select :event_type, ["Private", "Public"] %>
+      
+      <%= f.submit "Create" %>
+    <% end %>
+    </div>
+</div>
+
+<script>
+    let categories_select = document.querySelector('#event_category')
+    let sub_categories_select = document.querySelector('#event_sub_category')
+
+    categories_select.onchange = function(e){
+        $("#event_sub_category").html("");
+        hash = {
+            'Outdoors': ['Cycling', 'Camping', 'Hiking', 'Fishing'],
+            'Technology': ['Crypto', 'SEO', 'E-Commerce'],
+            'Health': ['Fitness', 'Nutrition', 'Yoga'],
+            'Education': ['Math', 'Engineering', 'Science'],
+            'Food & Drink': ['Coffee', 'Vegan', 'Wine'],
+        }
+        console.log(hash[e.target.value]);
+        resultArray = hash[e.target.value]
+
+        resultArray.forEach(function(value){
+          var option = document.createElement("option");
+          option.innerHTML = value;
+          $("#event_sub_category").append(option);
+        });
+    }
+
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+  $('#datepicker').datepicker({format: 'dd-mm-yyyy'});
+
+
+  let autocomplete
+      function initialize() {
+  var input = document.getElementById('searchTextField');
+  autocomplete = new google.maps.places.Autocomplete(input);
+  google.maps.event.addDomListener(autocomplete, 'place_changed', function(){
+    var lat = (autocomplete.getPlace().geometry.location.lat())
+    var lng = (autocomplete.getPlace().geometry.location.lng())
+    console.log(lat)
+    console.log(lng)
+  });
+}
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>

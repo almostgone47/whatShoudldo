@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ /*
+ *= require rails_bootstrap_forms
+ *= require bootstrap-datepicker 
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap";
+
+ body.homepage {
+    background-image: url("http://wp.widewallpapers.net/4k/cities/new-york/3840x2160/New-York-3840x2160-001.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+ 
+ body,html {
+    height: 100%;
+ }
+ 
+ .headline {
+     margin-top: 150px;
+     color: white
+ }
+
+.nav-link {
+    padding-top: 2px;
+  }
+
+.dropdown-menu a {
+    font-size: 0.8em;
+    padding-left: 15px;
+}
+
+.dropdown-menu {
+    min-width: 8em !important;
+}
+
+.dropdown-menu.show{
+    left: -60px;
+}
+
+.dropdown-menu.show a:hover{
+    text-decoration: none ;
+}
+
+.avatar {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 150px;
+    width: 200px;
+    height: 200px;
+}
+ .avatar-nav {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 150px;
+    width: 45px;
+    height: 45px;
+}

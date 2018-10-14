@@ -1,0 +1,41 @@
+<%= form_for User.new, :builder => BootstrapFormBuilder do |form| %>
+
+  <%= form.group :first_name do %>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  <% end %>
+  
+  <%= form.group :last_name do %>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  <% end %>
+  
+  <%= form.group :gender do %>
+    <%= form.label :gender %>
+    <%= form.text_field :gender %>
+  <% end %>
+
+  <%= form.group :country do %>
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  <% end %>
+
+  <%= form.group :email do %>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  <% end %>
+  
+  <%= form.group :password do %>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  <% end %>
+
+  <%= form.submit "Sign up", class: "btn btn-primary" %>
+
+  <div class="other-links" style="margin-top: 15px; margin-left: 5px;">
+  Already have an account? </br><a href="#" class="linkLogIn align-middle mr-4">Log In</a>
+
+  </div>
+
+<% end %>
+
