@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg ">
+
+  <%= link_to '/' do %>
+  <%= image_tag("logo.png", class: "navbar-brand ml-4", width: "55px", height: "55px", alt: "Logo") %>
+  <% end %>		
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+    <% if signed_in? %>
+      <ul class="navbar-nav ml-auto">
+        <% if !current_user.participant? %>
+          <li class="nav-item mt-4">
+            <%= link_to "Create an event", new_event_path, class: "align-middle mr-5 text-dark" %>
+          </li> 
+        <% end %>
+        <% if !current_user.participant? %>
+          <li class="nav-item mt-4">
+            <%= link_to "My Events", users_path, class: "align-middle mr-5 text-dark" %>
+          </li> 
+        <% end %>
+        <li class="nav-item dropdown mr-4">
+          <%= link_to(image_tag(current_user.avatar.small_thumb.url, class: "avatar-nav"), "/#", class: "nav-link align-middle mt-1", id: "navbarDropdown", role: "button", :'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false ) %>   
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Edit Profile", edit_user_path(current_user), class: "text-dark" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Sign Out", sign_out_path, method: :delete, class: "text-dark" %>          
+          </div>
+        </li>
+      </ul>    
+    <% else %>
+    <% end %>
+
+  </div>
+</nav>

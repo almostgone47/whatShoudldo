@@ -60,3 +60,23 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Added
+gem "awesome_print", require:"ap"
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.1.3'
+gem "bootstrap_form", ">= 4.0.0.alpha1"
+gem 'bootstrap-datepicker-rails' 
+
+gem 'clearance'
+gem 'figaro'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+# gem 'omniauth-google-oauth2'
+# gem 'sprockets-rails', :require => 'sprockets/railtie'
+# gem 'braintree'
+# gem 'sidekiq'
+
+gem "pg_search"
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
