@@ -1,8 +1,66 @@
-<div class="container-fluid">
-    <img class="" src="http://mediad.publicbroadcasting.net/p/wglt/files/styles/x_large/public/201603/160324rainofColor.jpg">
-</div>
+<% if @event.images? %>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <% @event.images.each_with_index do |image, index| %>
+        <div class="carousel-item <%= 'active' if index == 0%>" data-slide-number="<%= index %>">
+          <%= link_to(image_tag(image.url, alt: "image", class: "d-block w-100 slide-c"), image.url, target: '_blank') %>
+        </div>
+      <% end%>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<% end %>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
+        <div class="col-8 content">
+            <div class="my-4 border-bottom pb-3">
+                <h3><%= @event.title %></h3>
+                <span class="font-weight-bold text-uppercase text-muted "><%= @event.category %> | <%= @event.sub_category %> </span>
+                <%#= @event.description %>
+            </div>    
+            <div class="my-4 border-bottom pb-3"> 
+                <div class="row pl-3">
+                    <%= link_to(image_tag(@user.avatar.small_thumb.url, class: "avatar-small"), user_path) %> 
+                    <span class="pt-3 ml-3">Hosted by <%= "#{@user.first_name} #{@user.last_name}" %></span>
+                </div>
+            </div>    
+            <div class="my-4 border-bottom pb-3"> 
+                <i class="material-icons mr-4 align-middle">access_time</i><%= @event.date.strftime('%A, %B %dth %Y') %></br>
+                <span class="ml-5"><%= @event.time %></span>
+            </div>    
+            <div class="my-4 border-bottom pb-3"> 
+                <i class="material-icons mr-4 align-middle">attach_money</i>
+                $<%= @event.cost %> per person
+            </div>    
+            <div class="my-4 border-bottom pb-3"> 
+                <div class="row pl-3">
+                    <i class="material-icons mr-4 align-middle">people</i>
+                    <%= "#{@event.participants.count} people are going" %>
+                </div>
+                <div class="row pl-3">
+                    <% @event.participants.each do |x| %>
+                        <% @participant = User.find(x) %>
+                        <%= link_to(image_tag(@participant.avatar.small_thumb.url, class: "avatar-small mt-3"), user_path(x)) %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="my-4 border-bottom pb-3"> 
+                <%= @event.description %>
+            </div>  
+            <div class="container text-center">
+                <%= bootstrap_form_with(model: @event, url: event_path, local: true, method: :put) do |f| %>
+                    <%= f.hidden_field :participants, value: "#{current_user.id}" %>
+                    <%= f.submit "Count me in", class: "btn btn-success mb-5" %>
+                <% end %>
+            </div>   
+        </div>
     </div>
 </div>

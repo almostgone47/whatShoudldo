@@ -23,7 +23,8 @@ ActiveRecord::Schema.define(version: 2018_10_14_055654) do
     t.string "mood"
     t.integer "longtitude"
     t.integer "latitude"
-    t.datetime "time"
+    t.date "date"
+    t.time "time"
     t.integer "cost"
     t.string "participants", default: [], array: true
     t.boolean "status", default: true
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_055654) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "images", default: [], array: true
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

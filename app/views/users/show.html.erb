@@ -1,1 +1,14 @@
-show
+<div class="container">
+    <div class="row py-3">
+        <div class="col-4 col-sm-3">
+            <%= image_tag(@user.avatar.thumb.url, :class => "avatar") %>
+        </div>
+        <div class="col-8 col-sm-9 content border pt-4 mt-3">
+            <h1><%= "Hey, I'm #{@user.first_name}!" %></h1>
+            <h6><%= "#{@user.country} | Joined in #{@user.created_at}" %></h6>
+            <% if current_user.id == @user.id %>
+                <%= link_to 'Edit Profile', edit_user_path %>
+            <% end %>
+        </div>
+    </div>
+</div>

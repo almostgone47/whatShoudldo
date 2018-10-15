@@ -1,0 +1,76 @@
+<% if signed_in? %>
+
+<div class="container my-4">
+    <div class="row py-3">
+        <div class="col-4 col-sm-3 pl-0 pr-5">
+            <%= render partial: '/home/accordion' %>
+        </div>
+
+        <div class="col-8 col-sm-9">
+            <div class="card-deck my-3">
+                <% @searched_results.each_with_index {|x, i| %>
+                    <div class="col-md-3 col-sm-6 col-xs-12 px-0 mb-4">
+                        <%= link_to event_path(x.id), :class => "card card-hyperlink border-0 ml-0" do %>
+                            <%= image_tag("exp/#{rand(1..30)}.png", class: "card-img-top ml-3") %>
+                            <div class="card-body">
+                                <p class="card-title small my-0"> <%= "#{x.category} | #{x.sub_category}" %> </p>
+                                <h5 class="card-title my-1"> <%= x.title %> </h5>
+                                <p class="card-text small my-0">From $<%= x.cost %> per person</p>
+                                <p class="card-text small my-1"><%= x.date.strftime('%A, %B %dth %Y') %></p>
+                                <p class="card-text small my-1"><%= x.time %></p>
+                                <% x.participants.first(5).each do |y| %>
+                                    <% @participant = User.find(y) %>
+                                    <%= link_to(image_tag(@participant.avatar.small_thumb.url, class: "avatar-xs mt-2"), user_path(y)) %>
+                                <% end %></br>
+                                <small class="text-muted"><%="#{x.participants.count} people attending" %></small>
+                            </div>
+                        <% end %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% end %>
+
+<!--
+<script>
+  $("#search_fields").on("keyup", function(){
+    autocomplete();
+  });
+
+  function autocomplete(){
+    $.ajax({
+      url: '/home/search',
+      type: 'POST',
+      data: $("#event-search").serialize() + "&authenticity_token=" + encodeURIComponent(AUTH_TOKEN), //takes the form data and authenticity toke and converts it into a standard URL
+      dataType: 'json', //specify what type of data you're expecting back from the servers
+      error: function() {
+          console.log("Something went wrong");
+      },
+      success: function(data) { 
+        
+        let container = document.querySelector('.card-deck')
+        container.innerHTML = ""
+        data.forEach(function(element) {
+           let card = `<div class="col-md-3 col-sm-6 col-xs-12 px-0 mb-4">
+                            <a class="card card-hyperlink" href="/events/${element.id}">
+                                <img class="card-img-top" src="https://a0.muscache.com/im/pictures/65441227/bb1eb2dd_original.jpg?aki_policy=large" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-title">${element.category}</p>
+                                    <h5 class="card-title"> ${element.title}</h5>
+                                    <p class="card-text">From $${element.price} per night | Free cancellation</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">ratings | Superhost</small>
+                                </div>
+                            </a>            
+                      </div>`
+          container.innerHTML += card
+        });
+      }
+    });
+  }
+</script>
+-->

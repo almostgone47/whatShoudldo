@@ -34,6 +34,19 @@
      color: white
  }
 
+ a.card-hyperlink, a.card-hyperlink:hover {
+    color: #333;
+    text-decoration: none;
+ }
+
+ .slide-c {
+    height: 400px !important; 
+    overflow: hidden; 
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+ }
+
 .nav-link {
     padding-top: 2px;
   }
@@ -63,11 +76,29 @@
     width: 200px;
     height: 200px;
 }
- .avatar-nav {
+.avatar-small {
+    display: block;
+    border-radius: 150px;
+    width: 50px;
+    height: 50px;
+}
+.avatar-xs {
+    border-radius: 150px;
+    width: 30px;
+    height: 30px;
+}
+.avatar-nav {
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 150px;
     width: 45px;
     height: 45px;
+}
+
+#accordion .btn, #accordion .btn:hover {
+    text-decoration: none;
+    font-size:0.8em;
+    font-weight: 500;
+    color: #333;
 }

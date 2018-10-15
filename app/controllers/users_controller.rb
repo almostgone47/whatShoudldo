@@ -32,17 +32,17 @@ class UsersController < Clearance::UsersController
     end
   
     def update
-    #   if @user.update(user_params)
-    #     redirect_to user_path
-    #   else
-    #     render '/users/edit'
-    #   end
+      if @user.update(user_params)
+        redirect_to user_path
+      else
+        render '/users/edit'
+      end
     end
   
     def destroy
-    #   @user.remove_avatar!
-    #   @user.save
-    #   redirect_to user_path
+      @user.remove_avatar!
+      @user.save
+      redirect_to user_path
     end
   
     def user_from_params

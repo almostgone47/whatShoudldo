@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'home/interest' => 'home#interest'
-
+  get 'home/search' => 'home#search'
+  post 'home/search' => 'home#search'
+  
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
-  resources :users, controller: "users", only: [:create, :edit] do
+  resources :users, controller: "users", only: [:create, :edit, :show, :update, :destroy] do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]

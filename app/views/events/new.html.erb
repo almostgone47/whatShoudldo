@@ -1,16 +1,56 @@
 <div class="container my-5">
     <div class="">
     <%= bootstrap_form_with(model: @event, local: true, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" ) do |f| %>
+      <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@event.errors.count, "error") %> prohibited
+            this event from being saved:
+          </h2>
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <%= f.text_field :title %>
       <%= f.text_field :description %>
       <%= f.select :category, @category, :prompt => true  %>
       <%= f.select :sub_category, @sub_categories, :prompt => true %>
       <%= f.select :mood, ["Chill", "Fun", "Crazy"], :prompt => true, label: "Mood" %>
-      <%= f.text_field :location, id: "searchTextField" %>
-      <%= f.text_field :time, id: "datepicker", data:{ provide:'datepicker' } %>
+      <%#= f.text_field :location, id: "searchTextField" %>
+      <%= f.text_field :date, id: "datepicker", data:{ provide:'datepicker' } %>
+      <%#= f.text_field :time, id: "datepicker", data:{ provide:'datepicker' } %>
       <%= f.text_field :cost %>
       <%= f.select :event_type, ["Private", "Public"] %>
-      
+      <%= f.file_field :images, multiple: true, :onchange => "previewImg(this)" %>
+        <label>Preview:</label></br>
+        <div class="d-flex flex-column" id="image_preview"></div>
+        <%= link_to 'Delete Preview', '#', :onclick => "deletePreview" %></br>
+        
+            <script>
+              function previewImg() 
+              {
+              var total_file=document.getElementById("event_images").files.length;
+              for(var i=0;i<total_file;i++)
+              {
+                $('#image_preview').append("<div class='col-md-3'><img class='img-responsive mb-3' src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+              }
+              }
+
+              deletePreview = function (ele, i) {
+                "use strict";
+                try {
+                  $(ele).parent().remove();
+                  window.filesToUpload.splice(i, 1);
+                } catch (e) {
+                  console.log(e.message);
+                }
+              }
+            </script>
+
       <%= f.submit "Create" %>
     <% end %>
     </div>
@@ -45,17 +85,17 @@
   $('#datepicker').datepicker({format: 'dd-mm-yyyy'});
 
 
-  let autocomplete
-      function initialize() {
-  var input = document.getElementById('searchTextField');
-  autocomplete = new google.maps.places.Autocomplete(input);
-  google.maps.event.addDomListener(autocomplete, 'place_changed', function(){
-    var lat = (autocomplete.getPlace().geometry.location.lat())
-    var lng = (autocomplete.getPlace().geometry.location.lng())
-    console.log(lat)
-    console.log(lng)
-  });
-}
-  google.maps.event.addDomListener(window, 'load', initialize);
+//  let autocomplete
+//      function initialize() {
+//  var input = document.getElementById('searchTextField');
+//  autocomplete = new google.maps.places.Autocomplete(input);
+//  google.maps.event.addDomListener(autocomplete, 'place_changed', function(){
+//    var lat = (autocomplete.getPlace().geometry.location.lat())
+//    var lng = (autocomplete.getPlace().geometry.location.lng())
+//    console.log(lat)
+//    console.log(lng)
+//  });
+//}
+//  google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>

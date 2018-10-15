@@ -3,15 +3,19 @@
         <div class="card-deck my-3">
             <% @events.each_with_index {|x, i| %>
                 <div class="col-md-3 col-sm-6 col-xs-12 px-0 mb-4">
-                    <%= link_to event_path(x.id), :class => "card card-hyperlink" do %>
-                        <%= image_tag("exp/#{rand(1..30)}.png", class: "card-img-top") %>
+                    <%= link_to event_path(x.id), :class => "card card-hyperlink border-0 ml-0" do %>
+                        <%= image_tag("exp/#{rand(1..30)}.png", class: "card-img-top ml-3") %>
                         <div class="card-body">
-                            <p class="card-title small"> <%= x.time %> </p>
-                            <h5 class="card-title"> <%= x.title %> </h5>
-                            <p class="card-text small">From $<%= x.cost %> per person</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">7 people attending</small>
+                            <p class="card-title small my-0"> <%= "#{x.category} | #{x.sub_category}" %> </p>
+                            <h5 class="card-title my-1"> <%= x.title %> </h5>
+                            <p class="card-text small my-0">From $<%= x.cost %> per person</p>
+                            <p class="card-text small my-1"><%= x.date.strftime('%A, %B %dth %Y') %></p>
+                            <p class="card-text small my-1"><%= x.time %></p>
+                            <% x.participants.first(5).each do |y| %>
+                                <% @participant = User.find(y) %>
+                                <%= link_to(image_tag(@participant.avatar.small_thumb.url, class: "avatar-xs mt-2"), user_path(y)) %>
+                            <% end %></br>
+                            <small class="text-muted"><%="#{x.participants.count} people attending" %></small>
                         </div>
                     <% end %>
                 </div>

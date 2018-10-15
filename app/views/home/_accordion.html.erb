@@ -1,0 +1,54 @@
+<div id="accordion">
+  <div class="card border-0">
+    <div class="card-header bg-white" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link d-flex" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Date <i class="material-icons ml-auto"> keyboard_arrow_down </i>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+            <%= bootstrap_form_with url: home_search_path, method: :get, local: true do |f| %>
+                <div class="input-group mb-3" id="datepicker" data-provide="datepicker">
+                    <%= f.text_field :search_fields, id: "datepicker", data:{ provide:'datepicker' }, class: 'input-sm form-control text-small', onchange: 'this.form.submit();' %> 
+                </div>
+                <%= f.submit "Search", class: "d-none", :name => nil %>
+            <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="card border-0">
+    <div class="card-header bg-white" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link d-flex" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Price range <i class="material-icons ml-auto"> keyboard_arrow_down </i>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        2
+      </div>
+    </div>
+  </div>
+  <div class="card border-0">
+    <div class="card-header bg-white" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link d-flex" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Category <i class="material-icons ml-auto"> keyboard_arrow_down </i>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        <%= bootstrap_form_with url: home_search_path, method: :get, local: true do |f| %>
+            <div class="form-group">
+                <%= f.select :search_fields, @category, {}, { class: 'form-control', onchange: 'this.form.submit();' } %> 
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

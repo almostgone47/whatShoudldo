@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
-  # before_action :require_login, only: [:index]
+  before_action :require_login, only: [:new, :show]
 
   def index
-    # @all_events = Event.all
-    # @events = Event.where(nil)
-    # @events = @events.interests(params[:interest]) if params[:interest].present?
-    # @events = @events.mood(params[:mood]) if params[:mood].present?
+    @all_events = Event.all
+    @events = Event.where(nil)
+    @events = @events.interests(params[:interest]) if params[:interest].present?
+    @events = @events.mood(params[:mood]) if params[:mood].present?
 
   end
 
@@ -38,6 +38,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @user = User.find(@event.user_id)
   end
 
   def edit
@@ -48,7 +49,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update(event_params)
-      redirect_to events_path
+      redirect_to root_path
     else
       render '/event/edit'
     end
@@ -67,7 +68,7 @@ class EventsController < ApplicationController
 
   private
     def event_params
-      params.require(:event).permit(:title, :description, :location, :time, :cost, :status, :participants, :event_type, :category, :sub_category, :mood)
+      params.require(:event).permit(:title, :description, :location, :date, :time, :cost, :status, :participants, :event_type, :category, :sub_category, :mood, {images: []})
     end
     
     # def require_login
