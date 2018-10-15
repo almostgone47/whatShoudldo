@@ -51,7 +51,9 @@ ActiveRecord::Base.transaction do
     event['participants'] = @participants.sample(rand(2..15))
     event['mood'] = @mood.sample
     event['cost'] = rand(30..999)
+    event['date'] = Faker::Date.forward(23) # => "Fri, 03 Oct 2014"
     event['time'] = Faker::Time.forward(2, :all)
+    
     event['user_id'] = uids.sample
 
     Event.create(event)

@@ -21,7 +21,8 @@
       <%= f.select :sub_category, @sub_categories, :prompt => true %>
       <%= f.select :mood, ["Chill", "Fun", "Crazy"], :prompt => true, label: "Mood" %>
       <%#= f.text_field :location, id: "searchTextField" %>
-      <%= f.text_field :time, id: "datepicker", data:{ provide:'datepicker' } %>
+      <%= f.text_field :date, id: "datepicker", data:{ provide:'datepicker' } %>
+      <%#= f.text_field :time, id: "datepicker", data:{ provide:'datepicker' } %>
       <%= f.text_field :cost %>
       <%= f.select :event_type, ["Private", "Public"] %>
       <%= f.file_field :images, multiple: true, :onchange => "previewImg(this)" %>

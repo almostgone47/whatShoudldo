@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'home/interest' => 'home#interest'
-
+  get 'home/search' => 'home#search'
+  post 'home/search' => 'home#search'
+  
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 

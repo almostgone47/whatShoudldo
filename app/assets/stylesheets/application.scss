@@ -33,7 +33,7 @@
      margin-top: 150px;
      color: white
  }
- 
+
  a.card-hyperlink, a.card-hyperlink:hover {
     color: #333;
     text-decoration: none;
@@ -87,11 +87,18 @@
     width: 30px;
     height: 30px;
 }
- .avatar-nav {
+.avatar-nav {
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 150px;
     width: 45px;
     height: 45px;
+}
+
+#accordion .btn, #accordion .btn:hover {
+    text-decoration: none;
+    font-size:0.8em;
+    font-weight: 500;
+    color: #333;
 }

@@ -4,6 +4,16 @@
   <%= image_tag("logo.png", class: "navbar-brand ml-4", width: "55px", height: "55px", alt: "Logo") %>
   <% end %>		
 
+  <% if signed_in? %>
+    <div id="search-div" class="mt-4 ml-3">
+      <%= bootstrap_form_with url: home_search_path, method: :get, id: "event-search", local: true do |f| %>
+        <%= f.text_field :search_fields, hide_label: true, placeholder: "Try \"Scuba Diving\"", list: "list" %>
+        <%= f.submit "Search", class: "d-none", :name => nil %>
+        <datalist id="list"></datalist>
+      <% end %>
+    </div>  
+  <% end %>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,3 +44,46 @@
 
   </div>
 </nav>
+<script>
+  $("#event-search").on("keyup", function(){
+    autocomplete();
+  });
+
+  $("#search_fields").on("change", function(e){
+    document.querySelectorAll("option").forEach(function(elem){
+      if (elem.value == e.target.value) {
+        $("#event-search").submit()
+      }
+    })
+  });
+
+  function autocomplete(){
+    $.ajax({
+      url: '/home/search',
+      type: 'POST',
+      data: $("#event-search").serialize() + "&authenticity_token=" + encodeURIComponent(AUTH_TOKEN), //takes the form data and authenticity toke and converts it into a standard URL
+      dataType: 'json', //specify what type of data you're expecting back from the servers
+      error: function() {
+          console.log("Something went wrong");
+      },
+      success: function(data) { // If success
+        $("#list").html("");  // Return data (UL list?) and insert it in the <div id="list"></div>
+        let resultArray = []
+        data.forEach(function(element) {
+          resultArray.push(element.title);
+          resultArray.push(element.sub_category);
+        });
+        resultArray = Array.from(new Set(resultArray))
+
+        resultArray.forEach(function(elem){
+          var option = document.createElement("option");
+          option.value = elem;
+
+          //append option to list
+          $("#list").append(option);
+
+        })
+      }
+    });
+  }
+</script>

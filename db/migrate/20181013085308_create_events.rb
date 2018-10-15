@@ -8,7 +8,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :mood
       t.integer :longtitude
       t.integer :latitude
-      t.datetime :time
+      t.date :date
+      t.time :time
       t.integer :cost
       t.string :participants, array: true, default: []
       t.boolean :status, default: "Active"

@@ -2,10 +2,10 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:new, :show]
 
   def index
-    # @all_events = Event.all
-    # @events = Event.where(nil)
-    # @events = @events.interests(params[:interest]) if params[:interest].present?
-    # @events = @events.mood(params[:mood]) if params[:mood].present?
+    @all_events = Event.all
+    @events = Event.where(nil)
+    @events = @events.interests(params[:interest]) if params[:interest].present?
+    @events = @events.mood(params[:mood]) if params[:mood].present?
 
   end
 
@@ -68,7 +68,7 @@ class EventsController < ApplicationController
 
   private
     def event_params
-      params.require(:event).permit(:title, :description, :location, :time, :cost, :status, :participants, :event_type, :category, :sub_category, :mood, {images: []})
+      params.require(:event).permit(:title, :description, :location, :date, :time, :cost, :status, :participants, :event_type, :category, :sub_category, :mood, {images: []})
     end
     
     # def require_login

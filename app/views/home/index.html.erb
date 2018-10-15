@@ -9,6 +9,7 @@
                             <p class="card-title small my-0"> <%= "#{x.category} | #{x.sub_category}" %> </p>
                             <h5 class="card-title my-1"> <%= x.title %> </h5>
                             <p class="card-text small my-0">From $<%= x.cost %> per person</p>
+                            <p class="card-text small my-1"><%= x.date.strftime('%A, %B %dth %Y') %></p>
                             <p class="card-text small my-1"><%= x.time %></p>
                             <% x.participants.first(5).each do |y| %>
                                 <% @participant = User.find(y) %>

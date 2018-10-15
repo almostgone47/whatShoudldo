@@ -23,7 +23,8 @@ ActiveRecord::Schema.define(version: 2018_10_14_055654) do
     t.string "mood"
     t.integer "longtitude"
     t.integer "latitude"
-    t.datetime "time"
+    t.date "date"
+    t.time "time"
     t.integer "cost"
     t.string "participants", default: [], array: true
     t.boolean "status", default: true
